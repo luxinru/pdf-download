@@ -1,9 +1,11 @@
 var express = require('express');
 var router = express.Router();
+// route to controller
+const { r2c } = require('./helper');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+router.get(
+  '/dashbord-export/task/:taskId/dashboard/:id',
+  r2c('ExportController', 'index')
+);
 
 module.exports = router;
