@@ -5,7 +5,11 @@ export const TOKEN = env('TOKEN', 'token');
 
 export const PAGE_URL_ROOT = env('PAGE_URL_ROOT', 'http://localhost:8080');
 
-export const STORAGE_ROOT = env('storage', 'storage');
+export const STORAGE_ROOT = env('STORAGE', 'storage');
+
+export const API_ROOT = env('API_ROOT', 'https://dev-api.xlink.cn');
+
+export const CHROMIUM_MODE = env('CHROMIUM_MODE', 'node_modules'); // or local
 
 /**
  * 获取环境变量
