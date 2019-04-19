@@ -11,10 +11,25 @@ export default class ExportController extends Controller {
    * @param {*} taskId
    * @param {*} dashboardId
    */
-  async index(taskId, dashboardId) {
-    this.res.end('Task is running');
-    const fileName = await this._render(dashboardId, taskId);
-    this._callback(fileName);
+  async index() {
+    const valid = this.validator({
+      task_id: { type: 'string' },
+      object_id: { type: 'string' },
+      object_type: { type: 'enum', values: ['dashboard'] }
+    });
+    if (!valid) return;
+
+    const taskId = this.request('task_id');
+    const objectId = this.request('object_id');
+    const objectType = this.request('object_type');
+
+    if (objectType === 'dashboard') {
+      this.resCodeJson({ msg: '导出任务提交成功', code: 1 });
+      const fileName = await this._renderDashboard(objectId, taskId);
+      this._callback(fileName);
+    } else {
+      this.resErrJson(400001, `object_type: ${objectType} 尚未支持`);
+    }
   }
 
   _callback(fileName) {
@@ -26,7 +41,7 @@ export default class ExportController extends Controller {
    * @param {*} id 仪表盘ID
    * @param {*} taskId
    */
-  async _render(id, taskId) {
+  async _renderDashboard(id, taskId) {
     const url = `${PAGE_URL_ROOT}/show.html#/dashboard/token/${TOKEN}/id/${id}`;
 
     const browser = await puppeteer.launch({

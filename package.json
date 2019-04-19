@@ -10,6 +10,7 @@
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.3",
     "express": "~4.15.2",
+    "fastest-validator": "^0.6.17",
     "jade": "~1.11.0",
     "morgan": "~1.8.1",
     "path-to-regexp": "^3.0.0",
