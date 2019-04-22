@@ -4,9 +4,15 @@
 
 `npm i`
 
+`npm run dev`
+
+`npm install -g pm2`
+
 `npm run start`
 
 #### API
+
+---
 
 1.call
 

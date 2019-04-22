@@ -1,0 +1,4 @@
+{
+  "name": "dp-server",
+  "script": "bin/www"
+}
