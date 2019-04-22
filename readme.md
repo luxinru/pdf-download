@@ -2,9 +2,15 @@
 
 #### Usage
 
+`cp .env.sample .env`
+
 `npm i`
 
+1.开发
+
 `npm run dev`
+
+2.生产
 
 `npm install -g pm2`
 
