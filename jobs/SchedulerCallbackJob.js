@@ -1,6 +1,7 @@
 import Job from './Job';
-import fetch from 'node-fetch';
+import { fetch } from '../helper';
 import { API_ROOT } from '../env';
+import log from '../logs';
 /**
  * 回调给服务端
  */
@@ -26,9 +27,9 @@ export default class extends Job {
           'Access-Token': this.accessToken
         }
       });
-      console.log(res);
+      log.info('上报导出结果成功:' + JSON.stringify(await res.json()));
     } catch (err) {
-      console.log(err);
+      log.error('上报导出结果失败:' + JSON.stringify(await err.json()));
     }
   }
 }

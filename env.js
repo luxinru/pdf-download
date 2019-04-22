@@ -10,10 +10,12 @@ export const TOKEN = env('TOKEN', 'token');
 export const PAGE_URL_ROOT = env('PAGE_URL_ROOT', 'http://localhost:8080');
 
 // 本地临时缓存地址
-export const STORAGE_ROOT = env('STORAGE', 'storage');
+export const CACHE_PATH = env('CACHE_PATH', 'storage/cache');
 
 //接口根地址
 export const API_ROOT = env('API_ROOT', 'https://dev-api.xlink.cn');
+
+export const LOG_PATH = env('LOG_PATH', 'storage/logs');
 
 // Chrome
 export const CHROMIUM_URI = env(

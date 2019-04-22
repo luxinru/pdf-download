@@ -1,8 +1,9 @@
 import Job from './Job';
-import { STORAGE_ROOT, PAGE_URL_ROOT, CHROMIUM_URI } from '../env';
+import { CACHE_PATH, PAGE_URL_ROOT, CHROMIUM_URI } from '../env';
 import puppeteer from 'puppeteer-core';
 import UploadFileJob from './UploadFileJob';
 import path from 'path';
+import log from '../logs';
 
 /**
  * 渲染仪表盘
@@ -19,6 +20,8 @@ export default class extends Job {
     const url = `${PAGE_URL_ROOT}/show.html#/dashboard/token/${
       this.accessToken
     }/id/${this.id}`;
+
+    log.info('导出页面:' + url);
 
     const options = {
       defaultViewport: {
@@ -43,7 +46,7 @@ export default class extends Job {
       };
     });
     // 构建文件名称
-    const filePath = `${STORAGE_ROOT}/${title}-${this.taskId}.pdf`;
+    const filePath = `${CACHE_PATH}/${title}-${this.taskId}.pdf`;
 
     await page.pdf({
       path: filePath,
@@ -54,6 +57,8 @@ export default class extends Job {
     });
 
     await browser.close();
+    log.info('PDF地址:' + filePath);
+
     Job.dispatch(
       new UploadFileJob(
         this.accessToken,

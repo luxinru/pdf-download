@@ -1,8 +1,9 @@
 import Job from './Job';
-import fetch from 'node-fetch';
+import { fetch } from '../helper';
 import { createReadStream } from 'fs';
 import { API_ROOT } from '../env';
 import SchedulerCallbackJob from './SchedulerCallbackJob';
+import log from '../logs';
 
 export default class extends Job {
   // fileName 路径 + 文件名
@@ -21,7 +22,7 @@ export default class extends Job {
       'base64'
     );
     const url = API_ROOT + '/v2/xfile/upload?content=' + base64Content;
-
+    log.info('上传PDF：' + url);
     try {
       const res = await fetch(url, {
         method: 'POST',
@@ -40,8 +41,9 @@ export default class extends Job {
           filePath
         )
       );
+      log.info('上传PDF成功:' + filePath);
     } catch (err) {
-      console.log(err);
+      log.error('上传PDF失败:' + JSON.stringify(await err.json()));
     }
   }
 }
