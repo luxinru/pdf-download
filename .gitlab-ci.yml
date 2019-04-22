@@ -47,6 +47,6 @@ build-pro:
   script:
     - VERSION=$(node -p -e "require('./package.json').version")
     - DATE=$(date +%F_%H%M)
-    - tar czvf pack-tmp.tar.gz  --exclude=.git --exclude=chromium  --exclude=.  --exclude=.. ./*
+    - tar czvf pack-tmp.tar.gz  --exclude=.git --exclude=chromium  ./
     - scp pack-tmp.tar.gz front@52.83.142.85:/data/www/downloads/${TAG}/${TAG}-server-pro-${VERSION}.${DATE}.tar.gz
     - rm -f pack-tmp.tar.gz
