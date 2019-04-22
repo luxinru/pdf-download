@@ -33,14 +33,17 @@ install-deps:
 
 # build-test:
 #   stage: build-test
-#   tags: dp-server
+#   tags:
+#     - dp-server
 #   only:
 #     - test
 
 build-pro:
   stage: build-pro
+  only:
+    - prod
   tags:
-    - pro
+    - dp-server
   script:
     - VERSION=$(node -p -e "require('./package.json').version")
     - DATE=$(date +%F_%H%M)
