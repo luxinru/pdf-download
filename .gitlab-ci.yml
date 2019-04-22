@@ -41,7 +41,7 @@ install-deps:
 build-pro:
   stage: build-pro
   only:
-    - prod
+    - pro
   tags:
     - dp-server
   script:
