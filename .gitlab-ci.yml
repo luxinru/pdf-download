@@ -22,7 +22,7 @@ cache:
 install-deps:
   stage: install
   tags:
-    - dp-server
+    - dp-app
   only:
     - test
     - pro
@@ -43,7 +43,7 @@ build-pro:
   only:
     - pro
   tags:
-    - dp-server
+    - dp-app
   script:
     - VERSION=$(node -p -e "require('./package.json').version")
     - DATE=$(date +%F_%H%M)
