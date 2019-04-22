@@ -1277,9 +1277,9 @@ proxy-from-env@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/proxy-from-env/-/proxy-from-env-1.0.0.tgz#33c50398f70ea7eb96d21f7b817630a55791c7ee"
 
-puppeteer@^1.14.0:
+puppeteer-core@^1.14.0:
   version "1.14.0"
-  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-1.14.0.tgz#828c1926b307200d5fc8289b99df4e13e962d339"
+  resolved "https://registry.yarnpkg.com/puppeteer-core/-/puppeteer-core-1.14.0.tgz#1c3dfe275cee6edbe1b5c1104023256f42c071e5"
   dependencies:
     debug "^4.1.0"
     extract-zip "^1.6.6"

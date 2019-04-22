@@ -1,6 +1,6 @@
 import Job from './Job';
-import { STORAGE_ROOT, PAGE_URL_ROOT, CHROMIUM_MODE } from '../env';
-import puppeteer from 'puppeteer';
+import { STORAGE_ROOT, PAGE_URL_ROOT, CHROMIUM_URI } from '../env';
+import puppeteer from 'puppeteer-core';
 import UploadFileJob from './UploadFileJob';
 import path from 'path';
 
@@ -28,15 +28,9 @@ export default class extends Job {
     };
 
     // 使用离线下载的Chromium
-    if (CHROMIUM_MODE === 'local') {
-      options.executablePath = path.resolve(
-        __dirname,
-        '../chromium/Chromium.app/Contents/MacOS/Chromium'
-      );
-    }
+    options.executablePath = path.resolve(__dirname, '../' + CHROMIUM_URI);
     const browser = await puppeteer.launch(options);
     const page = await browser.newPage();
-
     await page.goto(url, {
       waitUntil: ['networkidle0']
     });
