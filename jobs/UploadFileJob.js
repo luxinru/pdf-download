@@ -22,7 +22,7 @@ export default class extends Job {
       'base64'
     );
     const url = API_ROOT + '/v2/xfile/upload?content=' + base64Content;
-    log.info('上传PDF：' + url);
+    log.info('上传PDF：' + this.fileName, url);
     try {
       const res = await fetch(url, {
         method: 'POST',
@@ -34,16 +34,11 @@ export default class extends Job {
 
       const { id: xFileId, download_url: filePath } = await res.json();
       Job.dispatch(
-        new SchedulerCallbackJob(
-          this.accessToken,
-          this.taskId,
-          xFileId,
-          filePath
-        )
+        new SchedulerCallbackJob(this.accessToken, this.taskId, xFileId)
       );
       log.info('上传PDF成功:' + filePath);
     } catch (err) {
-      log.error('上传PDF失败:' + JSON.stringify(await err.json()));
+      log.error('上传PDF失败:', err);
     }
   }
 }

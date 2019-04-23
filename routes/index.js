@@ -8,6 +8,12 @@ router.get(
   r2c('ExportController', 'index')
 );
 
+router.get('/hello', (req, res) => {
+  res.end('hello world');
+});
+
+// router.get('/test', r2c('ExportController', 'test'));
+
 router.post('/v2/data_platform/headless/pdf', r2c('ExportController', 'index'));
 
 module.exports = router;
