@@ -8,7 +8,7 @@ export function fetch(...params) {
           resolve(res);
         } else {
           res.text().then(text => {
-            reject(text);
+            reject('fetch fail:' + text);
           });
         }
       })

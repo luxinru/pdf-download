@@ -19,7 +19,6 @@ export default class extends Job {
   async run() {
     const url = API_ROOT + `/v2/data_platform/scheduler/callback`;
     log.info('开始上报导出结果:' + JSON.stringify(this.body));
-
     try {
       const res = await fetch(url, {
         method: 'POST',
@@ -29,7 +28,10 @@ export default class extends Job {
           'Access-Token': this.accessToken
         }
       });
-      log.info('上报导出结果成功:' + JSON.stringify(await res.json()));
+      // @SP，该接口只要返回200，表示成功
+      if (res.status === 200) {
+        log.info('上报导出结果成功:' + this.body);
+      }
     } catch (err) {
       log.error('上报导出结果失败:', err);
     }
