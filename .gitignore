@@ -1,3 +1,4 @@
 node_modules
 .env
-chromium
+chromium/*
+!chromium/.gitkeep
