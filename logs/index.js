@@ -1,23 +1,36 @@
 import bunyan from 'bunyan';
 import path from 'path';
 
-import { LOG_PATH } from '../env';
+import { LOG_PATH, ENV } from '../env';
+
+const prePath =
+  LOG_PATH[0] === '/' ? LOG_PATH : path.resolve(__dirname, '../' + LOG_PATH);
+
+const streams = [
+  {
+    type: 'rotating-file',
+    level: 'info',
+    path: prePath + '/info.log',
+    count: 10,
+    period: '1d'
+  },
+  {
+    level: 'error',
+    path: prePath + '/error.log'
+  }
+];
+if (ENV === 'dev') {
+  streams.push({
+    type: 'rotating-file',
+    level: 'debug',
+    path: prePath + '/debug.log',
+    count: 3,
+    period: '1d'
+  });
+}
 const log = bunyan.createLogger({
   name: 'default',
-  streams: [
-    {
-      level: 'info',
-      path: path.resolve(__dirname, '../' + LOG_PATH + '/info.log')
-    },
-    {
-      level: 'error',
-      path: path.resolve(__dirname, '../' + LOG_PATH + '/error.log')
-    },
-    {
-      level: 'debug',
-      path: path.resolve(__dirname, '../' + LOG_PATH + '/debug.log')
-    }
-  ]
+  streams
 });
 
 export function accessLogMiddleware(req, res, next) {
