@@ -1,7 +1,6 @@
 import Job from './Job';
 import { fetch } from '../helper';
-// import { API_ROOT } from '../env';
-const API_ROOT = 'http://192.168.105.178:8888';
+import { API_ROOT } from '../env';
 import log from '../logs';
 /**
  * 回调给服务端
