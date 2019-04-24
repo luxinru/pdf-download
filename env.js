@@ -19,6 +19,9 @@ export const LOG_PATH = env('LOG_PATH', 'storage/logs');
 // 服务端口
 export const SERVER_PORT = env('SERVER_PORT', 3000);
 
+// prod or dev
+export const ENV = env('ENV', 'prod');
+
 // Chrome
 export const CHROMIUM_URI = env(
   'CHROMIUM_URI',

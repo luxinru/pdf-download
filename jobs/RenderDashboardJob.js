@@ -31,7 +31,13 @@ export default class extends Job {
     };
 
     // 使用离线下载的Chromium
-    options.executablePath = path.resolve(__dirname, '../' + CHROMIUM_URI);
+    if (CHROMIUM_URI[0] === '/') {
+      // 使用绝对路径
+      options.executablePath = path.resolve(CHROMIUM_URI);
+    } else {
+      // 使用相对路径
+      options.executablePath = path.resolve(__dirname, '../' + CHROMIUM_URI);
+    }
     const browser = await puppeteer.launch(options);
     const page = await browser.newPage();
     await page.goto(url, {
