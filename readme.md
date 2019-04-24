@@ -5,6 +5,12 @@
 **Chromium 下载，注意平台架构区分**
 [https://download-chromium.appspot.com/?platform=Linux_x64&type=snapshots](https://download-chromium.appspot.com/?platform=Linux_x64&type=snapshots)
 
+#### 可能需要安装的依赖：
+
+```
+yum install libX11 libXcomposite libXcursor libXdamage libXext libXfixes libXi libXrender libXtst cups-libs libXScrnSaver libXrandr alsa-lib atk gtk3
+```
+
 > 解压放置 chromium 目录之下
 
 **1.环境配置**
