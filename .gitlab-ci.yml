@@ -8,10 +8,7 @@ variables:
 
 stages:
   - install
-  - build-test
-  - build-pro
-  - build-pre
-  - build-prod
+  - build
 
 # This folder is cached between builds
 # http://docs.gitlab.com/ce/ci/yaml/README.html#cache
@@ -36,14 +33,14 @@ install-deps:
 #     - test
 
 build-pro:
-  stage: build-pro
+  stage: build
   only:
-    - pro
+    - build
   tags:
     - dp-app
   script:
     - VERSION=$(node -p -e "require('./package.json').version")
     - DATE=$(date +%F_%H%M)
-    - tar czvf pack-tmp.tar.gz  --exclude=chromium --exclude=node_modules --exclude=pack-tmp.tar.gz --exclude=.git/*  *
+    - tar czvf pack-tmp.tar.gz  --exclude=chromium --exclude=node_modules --exclude=pack-tmp.tar.gz --exclude=.git/*   .[!.]* *
     - scp pack-tmp.tar.gz front@52.83.142.85:/data/www/downloads/${TAG}/${TAG}-server-pro-${VERSION}.${DATE}.tar.gz
     - rm -f pack-tmp.tar.gz
