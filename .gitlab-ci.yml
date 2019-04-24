@@ -42,5 +42,5 @@ build:
     - VERSION=$(node -p -e "require('./package.json').version")
     - DATE=$(date +%F_%H%M)
     - tar czvf pack-tmp.tar.gz  --exclude=chromium --exclude=node_modules --exclude=pack-tmp.tar.gz --exclude=.git/*   `ls -A`
-    - scp pack-tmp.tar.gz front@52.83.142.85:/data/www/downloads/${TAG}/${TAG}-server-pro-${VERSION}.${DATE}.tar.gz
+    - scp pack-tmp.tar.gz front@52.83.142.85:/data/www/downloads/${TAG}/${TAG}-node-server-${VERSION}.${DATE}.tar.gz
     - rm -f pack-tmp.tar.gz
