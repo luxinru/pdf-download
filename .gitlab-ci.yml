@@ -32,7 +32,7 @@ install-deps:
 #   only:
 #     - test
 
-build-pro:
+build:
   stage: build
   only:
     - build
