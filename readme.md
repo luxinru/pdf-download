@@ -18,12 +18,16 @@ API_ROOT=https://dev-api.xlink.cn
 PAGE_URL_ROOT=http://localhost:8080
 SERVER_PORT=3000
 CHROMIUM_URI=chromium/chrome-mac/Chromium.app/Contents/MacOS/Chromium
-
+CACHE_PATH=storage/cache
+LOG_PATH=storage/logs
 
 *API_ROOT 接口根地址
 *PAGE_URL_ROOT 数据平台应用根地址
 *SERVER_PORT 服务端口
-*CHROMIUM_URI chromium内核本地地址，如是linux环境：chromium/chrome-linux/chrome
+*CHROMIUM_URI chromium内核本地地址，如是linux环境：chromium/chrome-linux/chrome, 支持绝对路径，以/开头
+*LOG_PATH 日志目录，支持绝对路径，以/开头
+*CACHE_PATH 日志目录，支持绝对路径，以/开头
+
 
 ```
 
