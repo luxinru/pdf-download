@@ -1,4 +1,4 @@
-import Controller from './controller';
+import Controller from './Controller';
 import Job from '../jobs/Job';
 import RenderDashboardJob from '../jobs/RenderDashboardJob';
 import SchedulerCallbackJob from '../jobs/SchedulerCallbackJob';
