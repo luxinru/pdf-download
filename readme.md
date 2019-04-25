@@ -1,19 +1,16 @@
 # 数据可视化平台 Node 服务
 
+**该服务用于实现页面导出 PDF（离线导出）等功能**
+
+> 基于 Express 4 开发的一个（RC）Router-Controller 项目
+
 ## 使用说明
 
-**Chromium 下载，注意平台架构区分**
-[https://download-chromium.appspot.com/?platform=Linux_x64&type=snapshots](https://download-chromium.appspot.com/?platform=Linux_x64&type=snapshots)
+**1.环境安装**
 
-#### 可能需要安装的依赖：
+安装 [Node](http://nodejs.cn/download/)（版本：8+）
 
-```
-yum install libX11 libXcomposite libXcursor libXdamage libXext libXfixes libXi libXrender libXtst cups-libs libXScrnSaver libXrandr alsa-lib atk gtk3
-```
-
-> 解压放置 chromium 目录之下
-
-**1.环境配置**
+**2.应用配置**
 
 ```
 cp .env.sample .env
@@ -37,13 +34,27 @@ LOG_PATH=storage/logs
 
 ```
 
+**Chromium 下载，注意平台架构区分**
+[https://download-chromium.appspot.com/?platform=Linux_x64&type=snapshots](https://download-chromium.appspot.com/?platform=Linux_x64&type=snapshots)
+
+> 解压到相对目录或者绝对目录下。
+> 关于 CHROMIUM_URI 配置：Linux 下指向 chrome-linux/chrome，Mac 下指向 chrome-mac/Chromium.app/Contents/MacOS/Chromium
+
+_可能需要安装的依赖：_
+
+```
+yum install libX11 libXcomposite libXcursor libXdamage libXext libXfixes libXi libXrender libXtst cups-libs libXScrnSaver libXrandr alsa-lib atk gtk3
+```
+
+**3.开发调试**
+
 `npm i`
 
-**2.开发**
 `npm run dev`
 
-**3.部署**
+**4.生产部署**
 
+`npm i`
 `npm install -g pm2`
 
 `npm run start`
@@ -51,8 +62,6 @@ LOG_PATH=storage/logs
 > 如需要修改 pm2 监控配置，可以修改 pm2.config.json
 
 ## 服务内部涉及到的 API
-
----
 
 1.[XFile 管理-XFile 上传](https://docs.xlink.cn/pages/viewpage.action?pageId=4063397#XFile%E7%AE%A1%E7%90%86-XFile%E4%B8%8A%E4%BC%A0)
 
