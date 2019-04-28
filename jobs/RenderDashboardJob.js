@@ -63,13 +63,11 @@ export default class extends Job {
 
     await browser.close();
     log.info('PDF地址:' + filePath);
+    const fileName =
+      CACHE_PATH[0] === '/'
+        ? path.resolve(filePath)
+        : path.resolve(__dirname, '../' + filePath);
 
-    Job.dispatch(
-      new UploadFileJob(
-        this.accessToken,
-        path.resolve(__dirname, '../' + filePath),
-        this.taskId
-      )
-    );
+    Job.dispatch(new UploadFileJob(this.accessToken, fileName, this.taskId));
   }
 }
