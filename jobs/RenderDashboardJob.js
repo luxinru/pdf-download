@@ -45,14 +45,13 @@ export default class extends Job {
     });
 
     // 获取页面高度，用于动态设置pdf高度
-    const { bodyHeight, title } = await page.evaluate(() => {
+    const { bodyHeight } = await page.evaluate(() => {
       return {
-        bodyHeight: document.body.clientHeight,
-        title: window._title
+        bodyHeight: document.body.clientHeight
       };
     });
     // 构建文件名称
-    const filePath = `${CACHE_PATH}/${title}-${this.taskId}.pdf`;
+    const filePath = `${CACHE_PATH}/${Date.now()}-${this.taskId}.pdf`;
 
     await page.pdf({
       path: filePath,

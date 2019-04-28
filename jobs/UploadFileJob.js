@@ -39,6 +39,12 @@ export default class extends Job {
       log.info('上传PDF成功:' + filePath);
     } catch (err) {
       log.error('上传PDF失败:', err);
+    } finally {
+      fs.unlink(this.fileName, err => {
+        if (err) {
+          log.error('删除PDF失败：', this.fileName, err);
+        }
+      });
     }
   }
 }
