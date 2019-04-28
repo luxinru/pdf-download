@@ -12,9 +12,11 @@
 
 **2.应用配置**
 
-```
-cp .env.sample .env
+`cp .env.sample .env`
 
+`vim .env`
+
+```
 #以下是配置项
 
 API_ROOT=https://dev-api.xlink.cn
@@ -55,6 +57,7 @@ yum install libX11 libXcomposite libXcursor libXdamage libXext libXfixes libXi l
 **4.生产部署**
 
 `npm i`
+
 `npm install -g pm2`
 
 `npm run start`
