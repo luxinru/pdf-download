@@ -1,6 +1,6 @@
 import Job from './Job';
 import { fetch } from '../helper';
-import { createReadStream } from 'fs';
+import fs, { createReadStream } from 'fs';
 import { API_ROOT } from '../env';
 import SchedulerCallbackJob from './SchedulerCallbackJob';
 import log from '../logs';
