@@ -43,7 +43,7 @@ export default env;
  * 解析.env配置
  */
 function parseEnv() {
-  const text = fs.readFileSync('./.env').toString();
+  const text = fs.readFileSync('./env.js').toString();
   const row = text.split('\n');
   const map = {};
   row.forEach(item => {

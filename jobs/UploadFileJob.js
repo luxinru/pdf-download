@@ -36,8 +36,10 @@ export default class extends Job {
       Job.dispatch(
         new SchedulerCallbackJob(this.accessToken, this.taskId, xFileId)
       );
+      console.log('上传PDF成功:' + filePath)
       log.info('上传PDF成功:' + filePath);
     } catch (err) {
+      console.log('上传PDF失败:' + err)
       log.error('上传PDF失败:', err);
     } finally {
       fs.unlink(this.fileName, err => {
