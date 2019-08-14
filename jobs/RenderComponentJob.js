@@ -25,7 +25,7 @@ export default class extends Job {
 
     const options = {
       defaultViewport: {
-        width: 1920,
+        width: 5260,
         height: 1080
       }
     };
@@ -52,7 +52,7 @@ export default class extends Job {
       path: filePath,
       printBackground: true,
       // scale: 1,
-      width: '1920px',
+      width: 5260 + 'px',
       height: bodyHeight + 10 + 'px'
     });
 
