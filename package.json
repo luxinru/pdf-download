@@ -7,11 +7,11 @@
     "start": "pm2 start pm2.config.json"
   },
   "dependencies": {
-    "body-parser": "~1.17.1",
+    "body-parser": "^1.19.0",
     "bunyan": "^1.8.12",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.3",
-    "express": "~4.15.2",
+    "express": "^4.17.1",
     "fastest-validator": "^0.6.17",
     "file-stream-rotator": "^0.4.1",
     "jade": "~1.11.0",

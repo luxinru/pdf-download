@@ -25,15 +25,15 @@ export default class extends Job {
 
     const options = {
       defaultViewport: {
-        width: 5260,
+        width: 1920,
         height: 1080
       }
     };
 
     // 使用离线下载的Chromium
     options.executablePath = path.resolve(__dirname, '../' + CHROMIUM_URI);
-    const browser = await puppeteer.launch(options);
-    const page = await browser.newPage();
+    let browser = await puppeteer.launch(options);
+    let page = await browser.newPage();
     await page.goto(url, {
       waitUntil: ['networkidle0']
     });
@@ -48,8 +48,24 @@ export default class extends Job {
 
     // 获取页面高度，用于动态设置pdf高度
     const contentWidth = await page.evaluate(() => {
-      return document.getElementById('tableId').firstChild.scrollWidth
+      const el = document.getElementById('tableId')
+      return el.firstChild.scrollWidth
     });
+
+    if (contentWidth && contentWidth > 1920) {
+      await browser.close()
+      browser = await puppeteer.launch({
+        defaultViewport: {
+          width: contentWidth + 20,
+          height: bodyHeight
+        },
+        executablePath: path.resolve(__dirname, '../' + CHROMIUM_URI)
+      })
+      page = await browser.newPage();
+      await page.goto(url, {
+        waitUntil: ['networkidle0']
+      });
+    }
     
     // 构建文件名称
     const filePath = `${CACHE_PATH}/${title}-${this.taskId}.pdf`;
@@ -58,7 +74,7 @@ export default class extends Job {
       path: filePath,
       printBackground: true,
       // scale: 1,
-      width: contentWidth && contentWidth > 1080 ? contentWidth + 'px' : 1080 + 'px',
+      width: contentWidth && contentWidth > 1920 ? contentWidth + 'px' : 1920 + 'px',
       height: bodyHeight + 10 + 'px'
     });
 
