@@ -45,6 +45,12 @@ export default class extends Job {
         title: window._title
       };
     });
+
+    // 获取页面高度，用于动态设置pdf高度
+    const contentWidth = await page.evaluate(() => {
+      return document.getElementById('tableId').firstChild.scrollWidth
+    });
+    
     // 构建文件名称
     const filePath = `${CACHE_PATH}/${title}-${this.taskId}.pdf`;
     
@@ -52,7 +58,7 @@ export default class extends Job {
       path: filePath,
       printBackground: true,
       // scale: 1,
-      width: 5260 + 'px',
+      width: contentWidth && contentWidth > 1080 ? contentWidth + 'px' : 1080 + 'px',
       height: bodyHeight + 10 + 'px'
     });
 
