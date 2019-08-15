@@ -1,6 +1,6 @@
 {
-  "name": "demo",
-  "version": "1.3.3",
+  "name": "data-platform-server",
+  "version": "1.3.4",
   "private": true,
   "scripts": {
     "dev": "node ./bin/www",
