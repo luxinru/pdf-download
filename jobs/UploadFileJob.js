@@ -35,7 +35,7 @@ export default class extends Job {
 
       const { id: xFileId, download_url: filePath } = await res.json();
       Job.dispatch(
-        new SchedulerCallbackJob(this.accessToken, this.taskId, xFileId, taskType)
+        new SchedulerCallbackJob(this.accessToken, this.taskId, xFileId, this.taskType)
       );
       console.log('上传PDF成功:' + filePath)
       log.info('上传PDF成功:' + filePath);
