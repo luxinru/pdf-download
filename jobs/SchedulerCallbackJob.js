@@ -6,17 +6,19 @@ import log from '../logs';
  * 回调给服务端
  */
 export default class extends Job {
-  constructor(accessToken, taskId, xFileId) {
+  constructor(accessToken, taskId, xFileId, taskType) {
     super();
 
     this.accessToken = accessToken;
+    this.taskType = taskType
     this.body = {
       task_id: taskId,
       xfile_id: xFileId
     };
   }
   async run() {
-    const url = API_ROOT + `/v2/data_platform/scheduler/callback`;
+    const address = this.taskType ? `/v2/data_platform/${this.taskType}/callback` : `/v2/data_platform/scheduler/callback`
+    const url = API_ROOT + address;
     log.info('开始上报导出结果:' + JSON.stringify(this.body));
     try {
       const res = await fetch(url, {

@@ -7,11 +7,12 @@ import log from '../logs';
 
 export default class extends Job {
   // fileName 路径 + 文件名
-  constructor(accessToken, fileName, taskId) {
+  constructor(accessToken, fileName, taskId, taskType) {
     super();
     this.accessToken = accessToken;
     this.fileName = fileName;
     this.taskId = taskId;
+    this.taskType = taskType
   }
   async run() {
     const type = this.fileName.split('.').pop();
@@ -34,7 +35,7 @@ export default class extends Job {
 
       const { id: xFileId, download_url: filePath } = await res.json();
       Job.dispatch(
-        new SchedulerCallbackJob(this.accessToken, this.taskId, xFileId)
+        new SchedulerCallbackJob(this.accessToken, this.taskId, xFileId, taskType)
       );
       console.log('上传PDF成功:' + filePath)
       log.info('上传PDF成功:' + filePath);

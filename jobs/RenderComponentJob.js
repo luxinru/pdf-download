@@ -9,11 +9,12 @@ import log from '../logs';
  * 渲染仪表盘
  */
 export default class extends Job {
-  constructor(accessToken, id, taskId) {
+  constructor(accessToken, id, taskId, taskType) {
     super();
     this.accessToken = accessToken;
     this.id = id;
     this.taskId = taskId;
+    this.taskType = taskType
   }
 
   async run() {
@@ -85,7 +86,8 @@ export default class extends Job {
       new UploadFileJob(
         this.accessToken,
         path.resolve(__dirname, '../' + filePath),
-        this.taskId
+        this.taskId,
+        this.taskType,
       )
     );
   }

@@ -25,11 +25,12 @@ export default class ExportController extends Controller {
     const taskId = this.request('task_id');
     const objectId = this.request('object_id');
     const objectType = this.request('object_type');
+    const taskType = this.request('task_type');
     if (objectType === 'dashboard') {
       Job.dispatch(new RenderDashboardJob(accessToken, objectId, taskId));
       this.resCodeJson({ msg: '导出任务提交成功', code: 1 });
     } else if (objectType === 'component') {
-      Job.dispatch(new RenderComponentJob(accessToken, objectId, taskId));
+      Job.dispatch(new RenderComponentJob(accessToken, objectId, taskId, taskType));
       this.resCodeJson({ msg: '导出任务提交成功', code: 1 });
     } else {
       this.resErrJson(400001, `object_type: ${objectType} 尚未支持`);
