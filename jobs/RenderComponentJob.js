@@ -50,7 +50,11 @@ export default class extends Job {
     // 获取页面高度，用于动态设置pdf高度
     const contentWidth = await page.evaluate(() => {
       const el = document.getElementById('tableId')
-      return el.firstChild.scrollWidth
+      if (el) {
+        return el.firstChild.scrollWidth
+      } else {
+        return 1920
+      }
     });
 
     if (contentWidth && contentWidth > 1920) {
