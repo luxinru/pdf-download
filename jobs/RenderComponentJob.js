@@ -28,7 +28,11 @@ export default class extends Job {
       defaultViewport: {
         width: 1920,
         height: 1080
-      }
+      },
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+      ]
     };
 
     // 使用离线下载的Chromium
@@ -75,13 +79,15 @@ export default class extends Job {
     // 构建文件名称
     const filePath = `${CACHE_PATH}/${title}-${this.taskId}.pdf`;
     
-    await page.pdf({
-      path: filePath,
-      printBackground: true,
-      // scale: 1,
-      width: contentWidth && contentWidth > 1920 ? contentWidth + 'px' : 1920 + 'px',
-      height: bodyHeight + 10 + 'px'
-    });
+    setTimeout(async () => {
+      await page.pdf({
+        path: filePath,
+        printBackground: true,
+        // scale: 1,
+        width: contentWidth && contentWidth > 1920 ? contentWidth + 'px' : 1920 + 'px',
+        height: bodyHeight + 10 + 'px'
+      });
+    }, 10 * 1000);
 
     await browser.close();
     log.info('PDF地址:' + filePath);
