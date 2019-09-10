@@ -57,15 +57,13 @@ export default class extends Job {
     // 构建文件名称
     const filePath = `${CACHE_PATH}/${Date.now()}-${this.taskId}.pdf`;
 
-    setTimeout(() => {
-      await page.pdf({
-        path: filePath,
-        printBackground: true,
-        // scale: 1,
-        width: '1920px',
-        height: bodyHeight + 10 + 'px'
-      });
-    }, 10 * 1000);
+    await page.pdf({
+      path: filePath,
+      printBackground: true,
+      // scale: 1,
+      width: '1920px',
+      height: bodyHeight + 10 + 'px'
+    });
 
     await browser.close();
     log.info('PDF地址:' + filePath);
