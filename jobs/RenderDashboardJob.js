@@ -20,6 +20,21 @@ export default class extends Job {
 
     log.info('导出页面:' + url)
 
+    if (!global.browser) {
+      puppeteer
+        .launch({
+          defaultViewport: {
+            width: 1920,
+            height: 1080
+          },
+          args: ['--no-sandbox', '--disable-setuid-sandbox'],
+          executablePath: path.resolve(__dirname, './' + CHROMIUM_URI)
+        })
+        .then(res => {
+          global.browser = res
+        })
+    }
+
     const browser = global.browser
     const page = await browser.newPage()
 
