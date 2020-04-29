@@ -1,6 +1,6 @@
 {
-  "name": "data-platform-server",
-  "version": "1.4.0",
+  "name": "pdf-server",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "node ./bin/www",

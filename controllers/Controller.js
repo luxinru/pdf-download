@@ -1,5 +1,5 @@
-import Validator from 'fastest-validator';
-import { wrapNumber } from '../utils';
+import Validator from "fastest-validator";
+import { wrapNumber } from "../utils";
 /**
  * 控制器基类，不直接使用
  */
@@ -21,7 +21,7 @@ export default class Controller {
   validator(schema = {}) {
     const keys = Object.keys(schema);
     const map = {};
-    keys.forEach(key => {
+    keys.forEach((key) => {
       map[key] = this.request(key);
     });
 
@@ -31,7 +31,7 @@ export default class Controller {
     const valid = this._validator.validate(map, schema);
 
     if (valid !== true) {
-      this.resErrJson(0, '参数有误', valid);
+      this.resErrJson(0, "参数有误", valid);
       return false;
     }
 
@@ -57,10 +57,10 @@ export default class Controller {
     return value || defaultValue;
   }
 
-  resErrJson(status = 40001, msg = 'Not Found', content = null) {
+  resErrJson(status = 40001, msg = "Not Found", content = null) {
     this.resCodeJson(content, status, {
       status,
-      msg
+      msg,
     });
   }
   resCodeJson(content = {}, status = 200001, error = null) {
@@ -68,7 +68,7 @@ export default class Controller {
       content.error = error;
     }
 
-    const httpStatus = (status + '').substr(0, 3);
+    const httpStatus = (status + "").substr(0, 3);
     this.resJson(content, httpStatus);
   }
 

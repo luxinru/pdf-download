@@ -1,4 +1,4 @@
-# 数据可视化平台 Node 服务
+# PDF 生成 Node 服务
 
 **该服务用于实现页面导出 PDF（离线导出）等功能**
 
@@ -27,7 +27,7 @@ CACHE_PATH=storage/cache
 LOG_PATH=storage/logs
 
 *API_ROOT 接口根地址
-*PAGE_URL_ROOT 数据平台应用根地址
+*PAGE_URL_ROOT 平台应用根地址
 *SERVER_PORT 服务端口
 *CHROMIUM_URI chromium内核本地地址，如是linux环境：chromium/chrome-linux/chrome, 支持绝对路径，以/开头
 *LOG_PATH 日志目录，支持绝对路径，以/开头

@@ -1,4 +1,4 @@
 {
-  "name": "dp-server",
+  "name": "pdf-server",
   "script": "bin/www"
 }
