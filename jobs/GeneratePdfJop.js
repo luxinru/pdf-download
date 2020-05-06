@@ -73,18 +73,28 @@ export default class extends Job {
 
     console.log("PDF地址:" + filePath);
 
-    this.res.header("Content-Type", "application/pdf");
+    const self = this;
 
-    const readStream = createReadStream(filePath, {
-      encoding: "utf-8",
+    self.res.header("Content-Type", "application/json");
+
+    const readStream = createReadStream(filePath);
+
+    let data = "";
+
+    readStream.on("data", (chrunk) => {
+      data += chrunk;
     });
 
-    readStream.pipe(this.res);
+    readStream.on("end", () => {
+      self.res.send(data);
+    });
 
-    // fs.unlink(filePath, (err) => {
-    //   if (err) {
-    //     console.log("删除失败");
-    //   }
-    // });
+    // readStream.pipe(this.res);
+
+    fs.unlink(filePath, (err) => {
+      if (err) {
+        console.log("删除失败");
+      }
+    });
   }
 }
