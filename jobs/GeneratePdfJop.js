@@ -3,18 +3,23 @@ import { CACHE_PATH, PAGE_URL_ROOT, CHROMIUM_URI } from "../env";
 import path from "path";
 var puppeteer = require("puppeteer-core");
 import fs, { createReadStream } from "fs";
+import mimeType from "mime-types";
 
 /**
  * 渲染仪表盘
  */
 export default class extends Job {
-  constructor(url, res) {
+  constructor(url, domId, res) {
     super();
     this.url = url;
+    this.domId = domId;
     this.res = res;
   }
 
   async run() {
+    console.log('进入方法:', new Date())
+    const self = this
+
     if (!global.browser) {
       puppeteer
         .launch({
@@ -22,7 +27,7 @@ export default class extends Job {
             width: 1920,
             height: 1080,
           },
-          args: ["--no-sandbox", "--disable-setuid-sandbox"],
+          args: ["--no-sandbox", "--disable-setuid-sandbox", "--lang=zh-CN"],
           executablePath: path.resolve(__dirname, "./" + CHROMIUM_URI),
         })
         .then((res) => {
@@ -39,57 +44,48 @@ export default class extends Job {
     });
 
     // 获取页面宽度 高度，用于动态设置pdf高度
-    const { bodyWeight, bodyHeight, title } = await page.evaluate(() => {
-      return {
-        bodyHeight: document.body.clientHeight,
-        title: window._title,
-        bodyWeight: document.body.scrollWidth,
-      };
+    const { bodyWeight, bodyHeight } = await page.evaluate(() => {
+      if (self.domId && document.getElementById("tableId")) {
+        const el = document.getElementById("tableId");
+        return {
+          bodyHeight: document.body.clientHeight,
+          bodyWeight: el.firstChild.scrollWidth
+        };
+      } else {
+        return {
+          bodyHeight: document.body.clientHeight,
+          bodyWeight: document.body.scrollWidth,
+        };
+      }
     });
 
-    if (bodyWeight && bodyWeight > 1920) {
-      await page.setViewport({
-        width: bodyWeight + 20,
-        height: bodyHeight,
-      });
-    }
-
-    const _id = Number(
-      Math.random().toString().substr(3, 36) + Date.now()
-    ).toString(36);
+    await page.setViewport({
+      width: (bodyWeight && bodyWeight > 1920) ? bodyWeight + 20 : 1920,
+      height: (bodyHeight && bodyHeight > 1080) ? bodyHeight + 10 : 1080,
+    });
 
     // 构建文件名称
-    const filePath = `${CACHE_PATH}/${_id}.pdf`;
-
+    const filePath = `${CACHE_PATH}/temp.pdf`;
+    
     await page.pdf({
       path: filePath,
       printBackground: true,
       // scale: 1,
-      width: bodyWeight && bodyWeight > 1920 ? bodyWeight + "px" : 1920 + "px",
-      height: bodyHeight + 10 + "px",
+      width: bodyWeight + 'px',
+      height: bodyHeight + 'px',
     });
 
-    await page.close();
-
+    page.close();
+    
+    console.log("时间:" + new Date())
     console.log("PDF地址:" + filePath);
 
-    const self = this;
+    const filePaths = path.resolve(filePath);
+    let data = fs.readFileSync(filePaths);
+    data = Buffer.from(data).toString("base64");
+    const base64 = "data:" + mimeType.lookup(filePath) + ";base64," + data;
 
-    self.res.header("Content-Type", "application/json");
-
-    const readStream = createReadStream(filePath);
-
-    let data = "";
-
-    readStream.on("data", (chrunk) => {
-      data += chrunk;
-    });
-
-    readStream.on("end", () => {
-      self.res.send(data);
-    });
-
-    // readStream.pipe(this.res);
+    this.res.send(base64);
 
     fs.unlink(filePath, (err) => {
       if (err) {

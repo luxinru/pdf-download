@@ -16,9 +16,23 @@ export default class PdfController extends Controller {
 
     const valid = this.validator({
       url: { type: "string" },
+      domId: { type: "string" }
     });
-    if (!url || !valid) return;
+    if (!url) {
+      this.res.send('url is a required parameter')
+      return
+    };
 
-    Job.dispatch(new GeneratePdfJop(url, this.res));
+    if (!valid) {
+      this.res.send('Parameter (url or domId) value invalid, expect (string)')
+      return
+    };
+
+    if (url.indexOf('http') === -1) {
+      this.res.send('Url is incorrect. Please confirm that the url can be opened in the browser.')
+      return
+    }
+
+    Job.dispatch(new GeneratePdfJop(url, domId, this.res));
   }
 }

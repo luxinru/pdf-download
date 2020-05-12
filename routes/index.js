@@ -8,7 +8,7 @@ router.get(
   r2c("ExportController", "index")
 );
 
-router.post("/pdf-download", r2c("PdfController", "index"));
+router.post("/v2/pdf-download", r2c("PdfController", "index"));
 
 // router.get('/test', r2c('ExportController', 'test'));
 

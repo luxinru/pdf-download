@@ -15,6 +15,7 @@
     "fastest-validator": "^0.6.17",
     "file-stream-rotator": "^0.4.1",
     "jade": "~1.11.0",
+    "mime-types": "^2.1.27",
     "node-fetch": "^2.3.0",
     "path-to-regexp": "^3.0.0",
     "puppeteer-core": "^1.14.0",
