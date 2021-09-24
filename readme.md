@@ -63,9 +63,3 @@ yum install libX11 libXcomposite libXcursor libXdamage libXext libXfixes libXi l
 `npm run start`
 
 > 如需要修改 pm2 监控配置，可以修改 pm2.config.json
-
-## 服务内部涉及到的 API
-
-1.[XFile 管理-XFile 上传](https://docs.xlink.cn/pages/viewpage.action?pageId=4063397#XFile%E7%AE%A1%E7%90%86-XFile%E4%B8%8A%E4%BC%A0)
-
-2.[数据网关服务（Data-GatewayService）设计文档-4.13.2 任务完成回调接口](https://docs.xlink.cn/pages/viewpage.action?pageId=27246383#id-%E6%95%B0%E6%8D%AE%E7%BD%91%E5%85%B3%E6%9C%8D%E5%8A%A1%EF%BC%88Data-GatewayService%EF%BC%89%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-4.13.2%E4%BB%BB%E5%8A%A1%E5%AE%8C%E6%88%90%E5%9B%9E%E8%B0%83%E6%8E%A5%E5%8F%A3)
