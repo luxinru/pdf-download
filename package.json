@@ -16,7 +16,7 @@
     "file-stream-rotator": "^0.4.1",
     "jade": "~1.11.0",
     "mime-types": "^2.1.27",
-    "node-fetch": "^2.3.0",
+    "node-fetch": "^2.6.7",
     "path-to-regexp": "^3.0.0",
     "puppeteer-core": "^1.14.0",
     "serve-favicon": "~2.4.2"
